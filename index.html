@@ -125,6 +125,8 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             margin-bottom: 20px;
         }
+        
+        .copy-box p { margin-top: 0; text-align: justify; }
 
         .status-label {
             font-weight: 700;
@@ -136,6 +138,7 @@
 
         .status-label.danger { color: var(--accent-danger); }
         .status-label.success { color: var(--accent-success); }
+        .status-label.template { color: var(--accent); margin-top: 10px; }
 
         /* Janela Matemática Específica */
         .math-window {
@@ -200,9 +203,9 @@
         }
 
         .exercise-item {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px dashed var(--border);
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px dashed var(--border);
         }
 
         .exercise-item:last-child {
@@ -238,7 +241,7 @@
         
         <!-- SITUAÇÃO 1 -->
         <div class="box-card">
-            <strong>Situação 1:</strong> Calcular o valor de $f(-3)$ para a função $f(x) = 2x + 5$.
+            <strong>Situação 1 (apenas leitura - não copie):</strong> Calcular o valor de $f(-3)$ para a função $f(x) = 2x + 5$.
             
             <div class="status-label danger">❌ Como NÃO fazer (O Erro):</div>
             <div class="math-window danger">
@@ -247,8 +250,11 @@
             <div class="analysis-box">
                 <strong>Análise do Erro:</strong> Omissão da notação da função à esquerda. A ausência de parênteses no número negativo faz com que os operadores ($\cdot$ e $-$) causem poluição visual e induzam ao erro.
             </div>
+        </div>
 
-            <div class="status-label success">✅ Como DEVE ser feito (O Correto):</div>
+        <div class="box-card">
+            <div class="status-label success">✅ Como DEVE ser feito (O Correto) - Copiar no Caderno:</div>
+            <p><strong>Situação 1:</strong> Calcular o valor de $f(-3)$ para a função $f(x) = 2x + 5$.</p>
             <div class="math-window success">
                 $$ \begin{aligned} 
                 f(-3) &= 2 \cdot (-3) + 5 \\ 
@@ -263,7 +269,7 @@
 
         <!-- SITUAÇÃO 2 -->
         <div class="box-card">
-            <strong>Situação 2:</strong> Resolver a equação $3x = 12$.
+            <strong>Situação 2 (apenas leitura - não copie):</strong> Resolver a equação $3x = 12$.
             
             <div class="status-label danger">❌ Como NÃO fazer (O Erro):</div>
             <div class="math-window danger">
@@ -272,8 +278,11 @@
             <div class="analysis-box">
                 <strong>Análise do Erro:</strong> Uso preguiçoso de setas horizontais no lugar do desenvolvimento vertical. Erro conceitual grave na inversão do operador (a divisão transformou-se em subtração).
             </div>
+        </div>
 
-            <div class="status-label success">✅ Como DEVE ser feito (O Correto):</div>
+        <div class="box-card">
+            <div class="status-label success">✅ Como DEVE ser feito (O Correto) - Copiar no caderno:</div>
+            <p><strong>Situação 2:</strong> Resolver a equação $3x = 12$.</p>
             <div class="math-window success">
                 $$ \begin{aligned} 
                 3x &= 12 \\ 
@@ -286,7 +295,7 @@
             </div>
         </div>
 
-        <div class="section-title">O Ritual Matemático (Modelo Padrão)</div>
+        <div class="section-title">O Ritual Matemático (Modelo Padrão) - Copiar no caderno</div>
         <div class="instruction">Abaixo está o fluxo correto de resolução visual que você deve seguir sempre.</div>
 
         <div class="box-card">
@@ -313,25 +322,86 @@
             </div>
         </div>
 
-        <div class="section-title">Treino Prático de Sintaxe</div>
-        <div class="instruction">Instrução: Resolva no seu caderno aplicando o "Ritual Matemático". Alinhe as igualdades e use parênteses.</div>
+        <div class="section-title">Atividade: Folha a parte para entregar</div>
+        <div class="instruction" style="background-color: var(--math-bg); border-color: var(--accent);">
+            <strong>Instrução Especial:</strong> Copie EXATAMENTE o "esqueleto" azul de cada questão em seu caderno. Em seguida, preencha as lacunas ($\square$) com os valores corretos e realize os cálculos finais. 
+        </div>
+        
+        <div class="instruction" style="background-color: var(--math-bg); border-color: var(--accent);">
+            <strong>Observação:</strong> Para fins de facilidade, coloque seu nome, curso e data na folha a parte, enumere as respostas e entregue. 
+        </div>
 
         <div class="box-card">
+            
             <div class="exercise-item">
                 <strong>Exercício 1:</strong> Dada a função linear $f(x) = -3x + 8$, calcule o valor rigoroso para $f(-4)$.
+                <div class="status-label template">✍️ Esqueleto para copiar no caderno:</div>
+                <div class="math-window">
+                    $$ \begin{aligned} 
+                    f(x) &= -3x + 8 \\
+                    f(-4) &= -3 \cdot (\square) + 8 \\
+                    f(-4) &= \square + 8 \\
+                    f(-4) &= \square
+                    \end{aligned} $$
+                </div>
             </div>
             
             <div class="exercise-item">
                 <strong>Exercício 2:</strong> Sendo $h(x) = 2x^2 - 5x$, demonstre o desenvolvimento formal para determinar $h(-2)$.
+                <div class="status-label template">✍️ Esqueleto para copiar no caderno:</div>
+                <div class="math-window">
+                    $$ \begin{aligned} 
+                    h(x) &= 2x^2 - 5x \\
+                    h(-2) &= 2 \cdot (\square)^2 - 5 \cdot (\square) \\
+                    h(-2) &= 2 \cdot (\square) - (\square) \\
+                    h(-2) &= \square + \square \\
+                    h(-2) &= \square
+                    \end{aligned} $$
+                </div>
             </div>
             
             <div class="exercise-item">
                 <strong>Exercício 3:</strong> Sendo $f(x) = -2x + 10$, estruture a equação passo a passo para obter $f(x) = 0$.
+                <div class="status-label template">✍️ Esqueleto para copiar no caderno:</div>
+                <div class="math-window">
+                    $$ \begin{aligned} 
+                    f(x) &= -2x + 10 \\
+                    \square &= -2x + 10 \\
+                    2x &= \square \\
+                    x &= \frac{\square}{\square} \\
+                    x &= \square
+                    \end{aligned} $$
+                </div>
             </div>
             
             <div class="exercise-item">
-                <strong>Exercício 4:</strong> Na Física, a posição de um móvel é dada por $S(t) = -5t + 20$. Utilizando o ritual correto, determine em qual instante ocorre $S(t) = 0$.
+                <strong>Exercício 4:</strong> Na Física, a posição de um móvel é dada pela função horária $S(t) = -5t + 20$. Utilizando o ritual de isolamento correto, determine em qual instante ocorre $S(t) = 0$.
+                <div class="status-label template">✍️ Esqueleto para copiar no caderno:</div>
+                <div class="math-window">
+                    $$ \begin{aligned} 
+                    S(t) &= -5t + 20 \\
+                    \square &= -5t + 20 \\
+                    5t &= \square \\
+                    t &= \frac{\square}{\square} \\
+                    t &= \square
+                    \end{aligned} $$
+                </div>
             </div>
+
+            <div class="exercise-item">
+                <strong>Exercício 5:</strong> Isole a variável organizando a equação: $5x - 8 = 2x + 7$. Lembre-se de alinhar a igualdade e mover letras para um lado e números para o outro.
+                <div class="status-label template">✍️ Esqueleto para copiar no caderno:</div>
+                <div class="math-window">
+                    $$ \begin{aligned} 
+                    5x - 8 &= 2x + 7 \\
+                    5x - \square x &= 7 + \square \\
+                    \square x &= \square \\
+                    x &= \frac{\square}{\square} \\
+                    x &= \square
+                    \end{aligned} $$
+                </div>
+            </div>
+
         </div>
     </div>
 

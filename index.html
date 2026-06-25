@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo de Sintaxe Matemática</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+    <style>
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent: #2563eb;
+            --accent-danger: #dc2626;
+            --accent-success: #16a34a;
+            --border: #e2e8f0;
+            --highlight: #f1f5f9;
+            --math-bg: #e0f2fe;
+            --math-border: #38bdf8;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
+            --accent: #3b82f6;
+            --accent-danger: #ef4444;
+            --accent-success: #22c55e;
+            --border: #334155;
+            --highlight: #0f172a;
+            --math-bg: #0c4a6e;
+            --math-border: #0284c7;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            margin: 0;
+            padding: 15px;
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        @media (min-width: 600px) {
+            header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            color: var(--accent);
+            line-height: 1.2;
+        }
+
+        .theme-toggle {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            align-self: flex-start;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent);
+            margin-top: 35px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        .instruction {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 15px;
+            background-color: var(--highlight);
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        .copy-box, .box-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .status-label {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-top: 20px;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        .status-label.danger { color: var(--accent-danger); }
+        .status-label.success { color: var(--accent-success); }
+
+        /* Janela Matemática Específica */
+        .math-window {
+            background-color: var(--math-bg);
+            border-left: 4px solid var(--math-border);
+            padding: 10px 15px;
+            margin: 5px 0 10px 0;
+            border-radius: 0 6px 6px 0;
+            font-size: 1.1rem;
+            overflow-x: auto;
+        }
+
+        .math-window.danger {
+            border-left-color: var(--accent-danger);
+            background-color: rgba(220, 38, 38, 0.08);
+        }
+
+        .math-window.success {
+            border-left-color: var(--accent-success);
+            background-color: rgba(22, 163, 74, 0.08);
+        }
+
+        .analysis-box {
+            font-size: 0.95rem;
+            padding: 10px;
+            background-color: var(--highlight);
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        /* Estrutura Passo a Passo */
+        .step-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .step-list li {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        @media (min-width: 600px) {
+            .step-list li {
+                flex-direction: row;
+                align-items: center;
+            }
+            .step-label {
+                width: 250px;
+                flex-shrink: 0;
+            }
+        }
+
+        .step-label {
+            font-weight: bold;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .exercise-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .exercise-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div>
+                <h1>O Ritual Matemático</h1>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">
+                    Protocolo Universal para Exatas
+                </div>
+            </div>
+            <button class="theme-toggle" id="themeBtn">Alternar Modo</button>
+        </header>
+
+        <div class="section-title">Contexto & Cópia Manual</div>
+        <div class="instruction">Instrução: Transcreva o texto abaixo em seu caderno. Respeite cada parêntese e alinhamento.</div>
+        
+        <div class="copy-box">
+            <p>No PISA 2022, o Brasil amargou a 64ª posição em Matemática. O diagnóstico aponta graves falhas na alfabetização algébrica: alunos não compreendem a sintaxe estrutural.</p>
+            <p>A Matemática é uma linguagem formal. A omissão de parênteses e o desalinhamento da igualdade configuram a "disgrafia em exatas". Escrever de forma bagunçada sobrecarrega a memória de trabalho e sabota o raciocínio.</p>
+            <p>Seguir o <strong>Ritual Matemático</strong> é obrigatório. Detalhar o processo passo a passo, linha por linha, expande a inteligência e blinda a mente contra o erro estrutural.</p>
+        </div>
+
+        <div class="section-title">Diagnóstico de Erros & Modo Correto</div>
+        
+        <!-- SITUAÇÃO 1 -->
+        <div class="box-card">
+            <strong>Situação 1:</strong> Calcular o valor de $f(-3)$ para a função $f(x) = 2x + 5$.
+            
+            <div class="status-label danger">❌ Como NÃO fazer (O Erro):</div>
+            <div class="math-window danger">
+                $$ 2 \cdot -3 + 5 = -1 $$
+            </div>
+            <div class="analysis-box">
+                <strong>Análise do Erro:</strong> Omissão da notação da função à esquerda. A ausência de parênteses no número negativo faz com que os operadores ($\cdot$ e $-$) causem poluição visual e induzam ao erro.
+            </div>
+
+            <div class="status-label success">✅ Como DEVE ser feito (O Correto):</div>
+            <div class="math-window success">
+                $$ \begin{aligned} 
+                f(-3) &= 2 \cdot (-3) + 5 \\ 
+                f(-3) &= -6 + 5 \\ 
+                f(-3) &= -1 
+                \end{aligned} $$
+            </div>
+            <div class="analysis-box">
+                <strong>Por que está correto?</strong> A notação $f(-3)$ foi mantida em todas as linhas para indicar o que está sendo calculado. Os parênteses isolam o número negativo e o sinal de igualdade ($=$) desce alinhado perfeitamente.
+            </div>
+        </div>
+
+        <!-- SITUAÇÃO 2 -->
+        <div class="box-card">
+            <strong>Situação 2:</strong> Resolver a equação $3x = 12$.
+            
+            <div class="status-label danger">❌ Como NÃO fazer (O Erro):</div>
+            <div class="math-window danger">
+                $$ 3x = 12 \Rightarrow x = 12 - 3 \Rightarrow 9 $$
+            </div>
+            <div class="analysis-box">
+                <strong>Análise do Erro:</strong> Uso preguiçoso de setas horizontais no lugar do desenvolvimento vertical. Erro conceitual grave na inversão do operador (a divisão transformou-se em subtração).
+            </div>
+
+            <div class="status-label success">✅ Como DEVE ser feito (O Correto):</div>
+            <div class="math-window success">
+                $$ \begin{aligned} 
+                3x &= 12 \\ 
+                x &= \frac{12}{3} \\ 
+                x &= 4 
+                \end{aligned} $$
+            </div>
+            <div class="analysis-box">
+                <strong>Por que está correto?</strong> O raciocínio obedece a gravidade: desce linha por linha sem setas horizontais. A operação inversa (divisão em forma de fração) foi aplicada visualmente de forma limpa, isolando a variável corretamente.
+            </div>
+        </div>
+
+        <div class="section-title">O Ritual Matemático (Modelo Padrão)</div>
+        <div class="instruction">Abaixo está o fluxo correto de resolução visual que você deve seguir sempre.</div>
+
+        <div class="box-card">
+            <p style="margin-top: 0;"><strong>Exemplo:</strong> Determinar o zero da função $f(x) = 4x - 12$.</p>
+            <div class="math-window success">
+                <ul class="step-list">
+                    <li>
+                        <div class="step-label">Linha 1: Equação original</div>
+                        <div>$4x - 12 = 0$</div>
+                    </li>
+                    <li>
+                        <div class="step-label">Linha 2: Operações primárias</div>
+                        <div>$4x = 12$</div>
+                    </li>
+                    <li>
+                        <div class="step-label">Linha 3: Operações secundárias</div>
+                        <div>$x = \frac{12}{4}$</div>
+                    </li>
+                    <li>
+                        <div class="step-label">Linha 4: Resolução da variável</div>
+                        <div>$x = 3$</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section-title">Treino Prático de Sintaxe</div>
+        <div class="instruction">Instrução: Resolva no seu caderno aplicando o "Ritual Matemático". Alinhe as igualdades e use parênteses.</div>
+
+        <div class="box-card">
+            <div class="exercise-item">
+                <strong>Exercício 1:</strong> Dada a função linear $f(x) = -3x + 8$, calcule o valor rigoroso para $f(-4)$.
+            </div>
+            
+            <div class="exercise-item">
+                <strong>Exercício 2:</strong> Sendo $h(x) = 2x^2 - 5x$, demonstre o desenvolvimento formal para determinar $h(-2)$.
+            </div>
+            
+            <div class="exercise-item">
+                <strong>Exercício 3:</strong> Sendo $f(x) = -2x + 10$, estruture a equação passo a passo para obter $f(x) = 0$.
+            </div>
+            
+            <div class="exercise-item">
+                <strong>Exercício 4:</strong> Na Física, a posição de um móvel é dada por $S(t) = -5t + 20$. Utilizando o ritual correto, determine em qual instante ocorre $S(t) = 0$.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const themeBtn = document.getElementById('themeBtn');
+        const html = document.documentElement;
+
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ],
+                throwOnError : false
+            });
+        });
+    </script>
+</body>
+</html>
